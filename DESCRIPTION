@@ -1,12 +1,14 @@
 Package: ourworldindata
 Version: 0.0.0.9000
-Title: An R data package containing data sets from ourworldindata.org
-Description: Contains manicured data extracted from ourworldindata.org
-  for the purposes of exploratory data analysis.
+Title: An R data package containing tidy versions of data sets from ourworldindata.org
+Description: Contains data extracted from ourworldindata.org and tidied
+    for the purposes of exploratory data analysis in R.
 Authors@R: c(
   person("Simon", "Jackson", email = "drsimonjackson@gmail.com", role = c("aut", "cre"))
   )
-Depends: R (>= 3.3.1)
+Depends:
+    R (>= 3.3.1)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 5.0.1
