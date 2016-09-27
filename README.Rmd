@@ -12,7 +12,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-This package contains manicured datasets extracted from the website, [ourworldindata.org](https://ourworldindata.org). The purpose of this package is to serve as a central R resource for these data sets so that they might be used for the likes of practice or exploratory data analysis in a replicable manner.
+This package contains manicured datasets extracted from the website, [ourworldindata.org](https://ourworldindata.org): "an online publication that shows how living conditions around the world are changing". The purpose of this package is to serve as a central R resource for these data sets so that they might be used for the likes of practice or exploratory data analysis in a replicable manner.
+
+Full credit must go to the [OurWorldInData team](https://ourworldindata.org/about/), who prepare all of the data sets that are included in this package. If you appreciate their work and make use of this package, please consider supporting [OurWorldInData](https://ourworldindata.org/support/).
 
 At present, this package contains the following data sets:
 
