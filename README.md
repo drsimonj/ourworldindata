@@ -6,4 +6,4 @@ Considerable thanks must go to [Max Roser](http://www.maxroser.com/about/) and t
 
 Data sets included in this package:
 
--   `childmortality` Child Mortality rates and other variables
+-   `childmortality` Country-level changes in child mortality rates and related variables over time.

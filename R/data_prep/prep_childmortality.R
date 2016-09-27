@@ -8,14 +8,23 @@ library(tidyverse)
 
 # https://ourworldindata.org/child-mortality/#health-care-and-child-mortality
 
-d <- read_csv("https://ourworldindata.org/grapher/child-mortality-vs-health-expenditure.csv?country=ALL") %>%
-  rename(
-    year = Year,
-    country = Country,
-    health_exp = `Health Expenditure per capita (WDI)`,
-    child_mort = `Child mortality (Gapminder)`,
-    continent = `Countries Continents`
-  )
+# Read in data (and save if new)
+as_file <- "data/raw_downloads/child-mortality-vs-health-expenditure.RData"
+if (file.exists(as_file)) {
+  load(as_file)
+} else {
+  d <- read_csv("https://ourworldindata.org/grapher/child-mortality-vs-health-expenditure.csv?country=ALL")
+  save(d, file = as_file)
+}
+
+# Rename variables
+d <- rename(d,
+       year = Year,
+       country = Country,
+       health_exp = `Health Expenditure per capita (WDI)`,
+       child_mort = `Child mortality (Gapminder)`,
+       continent = `Countries Continents`
+     )
 
 # Adding Continent information because
 # continent information is held in only certain rows (eg where `year == 2015`)
@@ -38,24 +47,69 @@ childmortality <- d
 
 # https://ourworldindata.org/child-mortality/#better-education-of-women-reduces-child-mortality
 
-d <- read_csv("https://ourworldindata.org/grapher/correlation-between-child-mortality-and-mean-years-of-schooling-for-those-aged-15-and-older.csv?country=ALL") %>%
-  rename(
-    year = Year,
-    country = Country,
-    continent = `Countries Continents`,
-    child_mort = `Gapminder (child mortality estimates version 8)`,
-    education = `Barro Lee Education Dataset: Educational Attainment (average years of total education)`
-  )
+# Read in data (and save if new)
+as_file <- "data/raw_downloads/correlation-between-child-mortality-and-mean-years-of-schooling-for-those-aged-15-and-older.RData"
+if (file.exists(as_file)) {
+  load(as_file)
+} else {
+  d <- read_csv("https://ourworldindata.org/grapher/correlation-between-child-mortality-and-mean-years-of-schooling-for-those-aged-15-and-older.csv?country=ALL")
+  save(d, file = as_file)
+}
 
-# Remove duplicate rows from previous data set
-# and any rows with missing data on new variable(s)
+# Rename variables
+d <- rename(d,
+       year = Year,
+       country = Country,
+       continent = `Countries Continents`,
+       child_mort = `Gapminder (child mortality estimates version 8)`,
+       education = `Barro Lee Education Dataset: Educational Attainment (average years of total education)`
+    )
+
+# Select relevant variables and remove and any rows with missing data
 d <- d %>%
        select(country, year, education) %>%
        filter(!is.na(education))
 
-# Save to main data frame
+# Join to main data frame
 childmortality <- childmortality %>% full_join(d)
+
+
+# Child mortality and poverty ---------------------------------------------
+
+# https://ourworldindata.org/child-mortality/#child-mortality-and-income-level
+
+# Read in data (and save if new)
+as_file <- "data/raw_downloads/poverty-and-child-mortality.RData"
+if (file.exists(as_file)) {
+  load(as_file)
+} else {
+  d <- read_csv("https://ourworldindata.org/grapher/poverty-and-child-mortality.csv?country=ALL")
+  save(d, file = as_file)
+}
+
+# Rename variables
+d <- rename(d,
+            year = Year,
+            country = `Country`,
+            continent = `Countries Continents`,
+            child_mort = `Child Mortality Estimates (CME Info)`,
+            population = `Total population (Gapminder)`,
+            poverty = `Poverty headcount at $1.90 a day (2011 PPP)`
+)
+
+# Select relevant variables and remove and any rows with missing data
+d <- d %>%
+  select(country, year, population, poverty) %>%
+  filter(!is.na(poverty) | !is.na(population))
+
+# Join to main data frame
+childmortality <- childmortality %>% full_join(d)
+
 
 # Save data object --------------------------------------------------------
 
-devtools::use_data(childmortality)
+# Reorder columns
+childmortality <- childmortality %>% select(year, country, continent, population, child_mort, everything())
+
+# Save for use in package
+#devtools::use_data(childmortality, overwrite = TRUE)

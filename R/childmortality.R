@@ -1,13 +1,14 @@
 #' Child Mortality rates and other variables
 #'
-#' Child Mortality rates (0-5 year-olds dying per 1,000 born) vs. other
-#' variables. Data combined from a number of available data sets.
+#' Country-level changes in child mortality rates and related variables over
+#' time. Data combined from a number of available data sets.
 #'
-#' @format A data frame with 33,461 rows and 6 variables:
+#' @format A data frame with 37,890 rows and 8 variables:
 #' \describe{
 #'   \item{year}{Year}
 #'   \item{country}{Country}
 #'   \item{continent}{Continent}
+#'   \item{population}{Total population}
 #'   \item{child_mort}{Child Mortality (0-5 year-olds dying per 1,000 born). The
 #'   under 5 mortality rate is the probability of a child born in a specific
 #'   year dying before reaching the age of five if subject to current
@@ -20,6 +21,9 @@
 #'   water and sanitation.}
 #'   \item{education}{Average years of schooling of the population aged 15 and
 #'   over.}
+#'   \item{poverty}{Poverty headcount ratio at $1.90 a day, or the percentage of
+#'   the population living on less than $1.90 a day at 2011 international
+#'   prices.}
 #' }
 #' @source \url{https://ourworldindata.org/child-mortality}
 "childmortality"
