@@ -4,6 +4,6 @@ This package contains data sets extracted from [OurWorldInData.org](https://ourw
 
 Considerable thanks must go to [Max Roser](http://www.maxroser.com/about/) and the rest of the [OurWorldInData team](https://ourworldindata.org/about/), who collate the data sets that are included in this package. If you appreciate their work and make use of this package, please consider supporting [OurWorldInData](https://ourworldindata.org/support/).
 
-At present, this package contains the following data sets:
+Data sets included in this package:
 
--   `mortality` Child Mortality vs. Total healthcare expenditure per capita
+-   `childmortality` Child Mortality rates and other variables
