@@ -1,7 +1,10 @@
 #' Child Mortality rates and other variables
 #'
 #' Country-level changes in child mortality rates and related variables over
-#' time. Data combined from a number of available data sets.
+#' time. Data combined from a number of available data sets. For details
+#' regarding the extraction and formation of this data set, please refer to the
+#' \href{https://github.com/drsimonj/ourworldindata/blob/master/R/data_prep/prep_childmortality.R}{data
+#' prep script}
 #'
 #' @format A data frame with 37,890 rows and 8 variables:
 #' \describe{

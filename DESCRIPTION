@@ -1,6 +1,6 @@
 Package: ourworldindata
 Version: 0.0.0.9000
-Title: An R data package containing tidy versions of data sets from ourworldindata.org
+Title: An R data package containing tidy versions of datasets from ourworldindata.org
 Description: Contains data extracted from ourworldindata.org and tidied
     for the purposes of exploratory data analysis in R.
 Authors@R: c(
