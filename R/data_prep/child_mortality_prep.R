@@ -92,47 +92,6 @@ d <- rename(d,
 # Save to data list
 datalist[["total_health"]] <- d
 
-# Child mortality vs healthcare expenditure -------------------------------
-#
-# This data set is from another section of the website
-
-# # Read in data (and save if new)
-# as_file <- "data/raw_downloads/child-mortality-vs-health-expenditure.RData"
-# if (file.exists(as_file)) {
-#   load(as_file)
-# } else {
-#   d <- read_csv("https://ourworldindata.org/grapher/child-mortality-vs-health-expenditure.csv?country=ALL")
-#   save(d, file = as_file)
-# }
-#
-# # Rename variables
-# d <- rename(d,
-#        year = Year,
-#        country = Country,
-#        health_exp = `Health Expenditure per capita (WDI)`,
-#        child_mort = `Child mortality (Gapminder)`,
-#        continent = `Countries Continents`
-#      )
-#
-# # Adding Continent information because
-# # continent information is held in only certain rows (eg where `year == 2015`)
-#
-# # Extract the rows with continents
-# # cont <- d  %>% select(country, continent) %>% filter(!is.na(continent))
-# #
-# # # Remove continent column from `d`, then join continent info
-# # d <- d %>%
-# #   select(-continent) %>%
-# #   left_join(cont)
-# #
-# # # Remove rows with missing data on health_exp & child_mort
-# # d <- d %>% filter(!(is.na(health_exp) & is.na(child_mort)))
-#
-# # Save to main data frame
-# datalist[["health"]] <- d
-# #childmortality <- d
-
-
 # Merge data frames -------------------------------------------------------
 
 # Merge by country and year only
