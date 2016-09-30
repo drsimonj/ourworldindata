@@ -16,9 +16,11 @@ This package contains datasets extracted from [OurWorldInData.org](https://ourwo
 
 Considerable thanks must go to [Max Roser](http://www.maxroser.com/about/) and the rest of the [OurWorldInData team](https://ourworldindata.org/about/), who collate the datasets that are included in this package. If you appreciate their work and make use of this package, please consider supporting [OurWorldInData](https://ourworldindata.org/support/).
 
-Data sets included in this package:
+# Data sets included in this package:
 
-- `childmortality` Country-level changes in child mortality rates and related variables over time.
+## Population
+
+- `child_mortality` Country-level changes in child mortality rates and related variables over time. A combination of all data sets available at <https://ourworldindata.org/child-mortality>.
 
 # Contributing to the ourworldindata R Package
 
