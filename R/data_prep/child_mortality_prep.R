@@ -7,7 +7,6 @@ library(tidyverse)
 library(stringr)
 library(countrycode)
 
-
 # List to contain datasets extracted from the website
 datalist <- list()
 
@@ -144,6 +143,8 @@ d <- d %>%
   select(-matches("continent")) %>%
   mutate(continent = countrycode(country, "country.name", "continent"))
 
+# Explore nested variables ------------------------------------------------
+
 # Investigate variables that appeared multiple times across datasets and are duplicated
 dup_var <- d %>% select(matches("\\.[xy]")) %>% names()
 
@@ -154,9 +155,6 @@ dup_var_stems <- dup_var %>% str_replace("(\\.[x|y])+", "") %>% unique()
 for (stem in dup_var_stems) {
   d <- d %>% nest_(key_col = stem, nest_cols = names(d)[str_detect(names(d), stem)])
 }
-
-
-# Explore nested variables ------------------------------------------------
 
 # Find any nested variables (variables that appears multiple times)
 keep(d, is.list)
