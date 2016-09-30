@@ -7,7 +7,7 @@
 #' \href{https://github.com/drsimonj/ourworldindata/blob/master/R/data_prep/financing_healthcare.R}{data
 #' prep script}
 #'
-#' @format A data frame with XXX rows and XX variables:
+#' @format A data frame with 36,873 rows and 17 variables:
 #' \describe{
 #'   \item{year}{Year}
 #'   \item{country}{Country}
@@ -22,7 +22,7 @@
 #'   programs (US only)}
 #'   \item{health_insurance_private}{Health Insurance Coverage by private
 #'   programs (US only). Not mutually exclusive from health_insurance_govt}
-#'   \ithem{health_insurance_any}{Health Insurance Coverage by any program (US
+#'   \item{health_insurance_any}{Health Insurance Coverage by any program (US
 #'   only)}
 #'   \item{health_exp_total}{Total Healthcare expenditure by country (% of
 #'   corresponding national GDP)}

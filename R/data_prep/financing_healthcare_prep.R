@@ -203,50 +203,53 @@ d <- d %>%
   select(-matches("continent")) %>%
   mutate(continent = countrycode(country, "country.name", "continent"))
 
-# Explore nested variables ------------------------------------------------
 
-# Investigate variables that appeared multiple times across datasets and are duplicated
-dup_var <- d %>% select(matches("\\.[xy]")) %>% names()
 
-# Condense to the stems (original names) of these variables
-dup_var_stems <- dup_var %>% str_replace("(\\.[x|y])+", "") %>% unique()
+# list() duplicated variables ---------------------------------------------
 
-# # For each stem, nest relevant data into a single variable
-# for (stem in dup_var_stems) {
-#   d <- d %>% nest_(key_col = stem, nest_cols = names(d)[str_detect(names(d), paste0(stem, "[$|\\.]"))])
-# }
-#
-#
-# # Find any nested variables (variables that appears multiple times)
-# keep(d, is.list)
-#
-# # Only nested variable is child_mort.
-# # Explore variability across different versions...
-# d %>%
-#   select(child_mort) %>%
-#   unnest() %>%
-#   mutate(mu = rowMeans(., na.rm= TRUE)) %>%
-#   arrange(mu) %>%
-#   mutate(row = 1:n()) %>%
-#   select(-mu) %>%
-#   gather(key, value, -row) %>%
-#   ggplot(aes(x = value, y = row, color = key)) +
-#   geom_point()
-#
-# # There is some variability, particularly in the child mortality of 200 - 400
-# # range. But otherwise, there seems to be a reasonable and unskewed clustering
-# # around the mean at each level. Therefore, decision is to calculate child_mort
-# # as the mean of existing estimates.
-# d <- d %>% mutate(child_mort = map_dbl(child_mort, rowMeans, na.rm = TRUE))
-#
-#
+# Search string to match any duplicated variables
+search_string <- d %>%
+                   select(matches("\\.[xy]")) %>%
+                   names() %>%
+                   str_replace("(\\.[x|y])+", "") %>%
+                   unique() %>%
+                   str_c(collapse = "|") %>%
+                   str_c("(", ., ")($|\\.)")
+
+# Gather duplicated variables and convert names to stems
+d <- d %>%
+       gather(variable, value, matches(search_string)) %>%
+       mutate(variable = str_replace(variable, "(\\.[x|y])+", ""))
+
+# Group by all columns except value to convert duplicated rows into list, then
+# spread by variable (var)
+dots <- names(x)[!str_detect(names(x), "value")] %>% map(as.symbol)
+d <- d %>%
+       group_by_(.dots = dots) %>%
+       summarise(new = list(value)) %>%
+       spread(variable, new) %>%
+       ungroup()
+
+# Explore duplicated variables --------------------------------------------
+
+# Find any nested variables (variables that appears multiple times)
+keep(d, is.list)
+
+# Two list variables: health_exp_public and health_exp_total
+
+# Will need checking, but for now, compute their mean...
+
+d <- d %>% mutate(health_exp_public = map_dbl(health_exp_public, mean, na.rm = TRUE),
+                  health_exp_total  = map_dbl(health_exp_total, mean, na.rm = TRUE))
+
+
 # # Save data object --------------------------------------------------------
-#
-# # Name of data to export with package
-# child_mortality <- d
-#
-# # Reorder columns
-# child_mortality <- child_mortality %>% select(year, country, continent, population, child_mort, everything())
-#
-# # Save for use in package
-# #devtools::use_data(child_mortality, overwrite = TRUE)
+
+# Name of data to export with package
+financing_healthcare <- d
+
+# Reorder columns
+financing_healthcare <- financing_healthcare %>% select(year, country, continent, health_exp_total, health_exp_public, everything())
+
+# Save for use in package
+#devtools::use_data(financing_healthcare, overwrite = TRUE)

@@ -15,7 +15,7 @@
   year dying before reaching the age of five if subject to current
   age-specific mortality rates. Multiple estimates were available from
   various data sources. Thus, the value that appears in this data frame is
-  the mean of available esitamtes.}
+  the mean of available estimates.}
   \item{survival_per_woman}{Children that survived past their 5th birthday
   per woman. Child survival rate was multiplied by fertility to obtain the
   data on how many children died on average per woman.}
