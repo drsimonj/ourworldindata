@@ -9,7 +9,13 @@
   \item{year}{Year}
   \item{country}{Country}
   \item{continent}{Continent}
-  \item{health_exp_public}{Public Health Expenditure as percent of GDP}
+  \item{health_exp_public}{Public Health Expenditure as percent of GDP.
+  Multiple estimates were available from various data sources. Thus, the
+  value that appears in this data frame is the mean of available estimates.}
+  \item{health_exp_total}{Total Healthcare expenditure by country (% of
+  corresponding national GDP). Multiple estimates were available from various
+  data sources. Thus, the value that appears in this data frame is the mean
+  of available estimates.}
   \item{health_insurance}{Health Insurance coverage (percent of labour
   force)}
   \item{nhs_exp}{National Health Service (NHS) expenditure as percent of GDP}
@@ -21,8 +27,6 @@
   programs (US only). Not mutually exclusive from health_insurance_govt}
   \item{health_insurance_any}{Health Insurance Coverage by any program (US
   only)}
-  \item{health_exp_total}{Total Healthcare expenditure by country (% of
-  corresponding national GDP)}
   \item{health_exp_public_percent}{Public expenditure on healthcare as
   percent of total healthcareexpenditure}
   \item{health_exp_oop_percent}{Out-of-pocket expenditure on healthcare as

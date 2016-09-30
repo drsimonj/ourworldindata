@@ -10,7 +10,12 @@ Data sets included in this package:
 Population
 ----------
 
--   `child_mortality` Country-level changes in child mortality rates and related variables over time. A combination of all datasets available at <https://ourworldindata.org/child-mortality>.
+-   `child_mortality`: Country-level changes in child mortality rates and related variables over time. A combination of all datasets available at <https://ourworldindata.org/child-mortality>.
+
+Health
+------
+
+-   `financing_healthcare`: Country-level changes in the financing of healthcare and related variables over time. A combination of datasets available at <https://ourworldindata.org/financing-healthcare>.
 
 Contributing to the ourworldindata R Package
 ============================================
