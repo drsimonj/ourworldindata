@@ -13,14 +13,8 @@ datalist <- list()
 
 # Child mortality, 1751 to 2013 -------------------------------------------
 
-# Read in data (and save if new)
-as_file <- "data/raw_downloads/child-mortality.RData"
-if (file.exists(as_file)) {
-  load(as_file)
-} else {
-  d <- read_csv("https://ourworldindata.org/grapher/child-mortality.csv?country=ALL")
-  save(d, file = as_file)
-}
+# Read in data
+d <- read_csv("https://ourworldindata.org/grapher/child-mortality.csv?country=ALL")
 
 # Rename variables
 d <- rename(d,
@@ -34,14 +28,8 @@ datalist[["raw"]] <- d
 
 # Sweden: Children per woman that survived childhood vs thosethat  --------
 
-# Read in data (and save if new)
-as_file <- "data/raw_downloads/Children-woman-death-vs-survival.RData"
-if (file.exists(as_file)) {
-  load(as_file)
-} else {
-  d <- read_csv("https://ourworldindata.org/grapher/Children-woman-death-vs-survival.csv?country=ALL")
-  save(d, file = as_file)
-}
+# Read in data
+d <- read_csv("https://ourworldindata.org/grapher/Children-woman-death-vs-survival.csv?country=ALL")
 
 # Rename variables
 d <- rename(d,
@@ -56,14 +44,8 @@ datalist[["survival"]] <- d
 
 # Poverty and child mortality ---------------------------------------------
 
-# Read in data (and save if new)
-as_file <- "data/raw_downloads/poverty-and-child-mortality.RData"
-if (file.exists(as_file)) {
-  load(as_file)
-} else {
-  d <- read_csv("https://ourworldindata.org/grapher/poverty-and-child-mortality.csv?country=ALL")
-  save(d, file = as_file)
-}
+# Read in data
+d <- read_csv("https://ourworldindata.org/grapher/poverty-and-child-mortality.csv?country=ALL")
 
 # Rename variables
 d <- rename(d,
@@ -80,14 +62,8 @@ datalist[["poverty"]] <- d
 
 # Correlation between child mortality and mean years of schooling ---------
 
-# Read in data (and save if new)
-as_file <- "data/raw_downloads/correlation-between-child-mortality-and-mean-years-of-schooling-for-those-aged-15-and-older.RData"
-if (file.exists(as_file)) {
-  load(as_file)
-} else {
-  d <- read_csv("https://ourworldindata.org/grapher/correlation-between-child-mortality-and-mean-years-of-schooling-for-those-aged-15-and-older.csv?country=ALL")
-  save(d, file = as_file)
-}
+# Read in data
+d <- read_csv("https://ourworldindata.org/grapher/correlation-between-child-mortality-and-mean-years-of-schooling-for-those-aged-15-and-older.csv?country=ALL")
 
 # Rename variables
 d <- rename(d,
@@ -103,14 +79,8 @@ datalist[["schooling"]] <- d
 
 # Per capita total health expenditure vs child mortality ------------------
 
-# Read in data (and save if new)
-as_file <- "data/raw_downloads/per-capita-total-expenditure-on-health-vs-child-mortality.RData"
-if (file.exists(as_file)) {
-  load(as_file)
-} else {
-  d <- read_csv("https://ourworldindata.org/grapher/per-capita-total-expenditure-on-health-vs-child-mortality.csv?country=ALL")
-  save(d, file = as_file)
-}
+# Read in data
+d <- read_csv("https://ourworldindata.org/grapher/per-capita-total-expenditure-on-health-vs-child-mortality.csv?country=ALL")
 
 # Rename variables
 d <- rename(d,
