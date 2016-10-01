@@ -35,3 +35,15 @@ nest_duplicated <- function(df, suffixes = "\\.[xy]") {
     tidyr::spread(variable, new) %>%
     dplyr::ungroup()
 }
+
+# Function to compute mean of vector, but returning NA when all values are NA
+#
+# Args:
+#   x Vector of potentially all missing values
+na_mean <- function(x) {
+  if (all(is.na(x)))
+    return(NA)
+
+  mean(x, na.rm = TRUE)
+}
+

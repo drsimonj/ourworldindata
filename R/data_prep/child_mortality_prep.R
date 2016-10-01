@@ -102,18 +102,10 @@ d <- d %>%
   select(-matches("continent")) %>%
   mutate(continent = countrycode(country, "country.name", "continent"))
 
+# Nest duplicated columns
+d <- d %>% nest_duplicated()
+
 # Explore nested variables ------------------------------------------------
-
-# Investigate variables that appeared multiple times across datasets and are duplicated
-dup_var <- d %>% select(matches("\\.[xy]")) %>% names()
-
-# Condense to the stems (original names) of these variables
-dup_var_stems <- dup_var %>% str_replace("(\\.[x|y])+", "") %>% unique()
-
-# For each stem, nest relevant data into a single variable
-for (stem in dup_var_stems) {
-  d <- d %>% nest_(key_col = stem, nest_cols = names(d)[str_detect(names(d), stem)])
-}
 
 # Find any nested variables (variables that appears multiple times)
 keep(d, is.list)
@@ -135,8 +127,9 @@ d %>%
 # range. But otherwise, there seems to be a reasonable and unskewed clustering
 # around the mean at each level. Therefore, decision is to calculate child_mort
 # as the mean of existing estimates.
-d <- d %>% mutate(child_mort = map_dbl(child_mort, rowMeans, na.rm = TRUE))
 
+# Mutate nested variables into mean values
+d <- d %>% mutate_if(is.list, funs(map_dbl(., na_mean)))
 
 # Save data object --------------------------------------------------------
 

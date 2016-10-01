@@ -6,6 +6,7 @@
 library(tidyverse)
 library(stringr)
 library(countrycode)
+source("R/data_prep/utility_functions.R")
 
 # List to contain datasets extracted from the website
 datalist <- list()
@@ -203,32 +204,8 @@ d <- d %>%
   select(-matches("continent")) %>%
   mutate(continent = countrycode(country, "country.name", "continent"))
 
-
-
-# list() duplicated variables ---------------------------------------------
-
-# Search string to match any duplicated variables
-search_string <- d %>%
-                   select(matches("\\.[xy]")) %>%
-                   names() %>%
-                   str_replace("(\\.[x|y])+", "") %>%
-                   unique() %>%
-                   str_c(collapse = "|") %>%
-                   str_c("(", ., ")($|\\.)")
-
-# Gather duplicated variables and convert names to stems
-d <- d %>%
-       gather(variable, value, matches(search_string)) %>%
-       mutate(variable = str_replace(variable, "(\\.[x|y])+", ""))
-
-# Group by all columns except value to convert duplicated rows into list, then
-# spread by variable (var)
-dots <- names(x)[!str_detect(names(x), "value")] %>% map(as.symbol)
-d <- d %>%
-       group_by_(.dots = dots) %>%
-       summarise(new = list(value)) %>%
-       spread(variable, new) %>%
-       ungroup()
+# Nest duplicated columns
+d <- d %>% nest_duplicated()
 
 # Explore duplicated variables --------------------------------------------
 
@@ -237,11 +214,10 @@ keep(d, is.list)
 
 # Two list variables: health_exp_public and health_exp_total
 
-# Will need checking, but for now, compute their mean...
+# Will need checking, but for now...
 
-d <- d %>% mutate(health_exp_public = map_dbl(health_exp_public, mean, na.rm = TRUE),
-                  health_exp_total  = map_dbl(health_exp_total, mean, na.rm = TRUE))
-
+# Mutate nested variables into mean values
+d <- d %>% mutate_if(is.list, funs(map_dbl(., na_mean)))
 
 # # Save data object --------------------------------------------------------
 
