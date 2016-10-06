@@ -25,3 +25,5 @@ Contributing to this package necessarily involves adding a data object to be exp
 -   `data/NAME-OF-DATA.rda` which is the data object to be exported with the package.
 -   `R/NAME-OF-DATA.R` which contains the roxygen comments that describe the data and each variable, and provide a link to the data source.
 -   `R/data_prep/NAME-OF-DATA_prep.R` which is an R script that demonstrates how the data was compiled. These files will be ignored in the package build.
+
+Additionally, be sure to add the package to the lists in the README (`README.Rmd`) and package documentation (see `R/ourworldindata.R`).
